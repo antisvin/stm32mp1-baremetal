@@ -20,6 +20,7 @@ ARCH_CFLAGS ?= -DUSE_FULL_LL_DRIVER \
 			   -DSTM32MP157Cxx \
 			   -DSTM32MP1 \
 			   -DCORE_CA7 \
+			   -DCMSIS_device_header=stm32mp1x.h
 
 OPTFLAG ?= -O0
 
@@ -30,6 +31,7 @@ CFLAGS = -g2 \
 		 $(ARCH_CFLAGS) \
 		 $(MCU) \
 		 $(INCLUDES) \
+		 -Wall \
 		 -fdata-sections -ffunction-sections \
 		 -nostartfiles \
 		 -nostdlib \
@@ -37,6 +39,7 @@ CFLAGS = -g2 \
 		 $(EXTRACFLAGS)\
 
 CXXFLAGS = $(CFLAGS) \
+		-D__PROGRAM_START=1 \
 		-std=c++20 \
 		-fno-rtti \
 		-fno-exceptions \
@@ -90,6 +93,7 @@ $(OBJDIR)/%.o: %.s
 $(OBJDIR)/%.o: %.c $(OBJDIR)/%.d
 	@mkdir -p $(dir $@)
 	$(info Building $< at $(OPTFLAG))
+	$(info $(CC) -c $(DEPFLAGS) $(OPTFLAG) $(CFLAGS) $< -o $@)
 	@$(CC) -c $(DEPFLAGS) $(OPTFLAG) $(CFLAGS) $< -o $@
 
 $(OBJDIR)/%.o: %.c[cp]* $(OBJDIR)/%.d

@@ -1,0 +1,4 @@
+[submodule "third-party/OwlProgram"]
+	path = third-party/OwlProgram
+	url = https://github.com/antisvin/OwlProgram.git
+	branch = feature/quadrature
