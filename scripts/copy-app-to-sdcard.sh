@@ -27,7 +27,7 @@ case "$(uname -s)" in
 		UNMOUNTCMD="diskutil unmount $2"
 		;;
 	Linux)
-		UNMOUNTCMD="unmount $2"
+		UNMOUNTCMD="umount $2"
 		;;
 	*)
 		echo 'OS not supported: disk was not unmounted'

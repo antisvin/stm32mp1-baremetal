@@ -1,0 +1,6 @@
+[submodule "examples/audio_neon/lib/ne10"]
+	path = examples/audio_neon/lib/ne10
+	url = https://github.com/projectNe10/Ne10
+[submodule "examples/audio_neon/lib/math-neon"]
+	path = examples/audio_neon/lib/math-neon
+	url = https://github.com/giuliomoro/math-neon.git

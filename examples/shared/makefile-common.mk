@@ -65,6 +65,7 @@ CC 		= $(ARCH)-gcc
 CXX 	= $(ARCH)-g++
 LD 		= $(ARCH)-g++
 AS 		= $(ARCH)-as
+AR              = $(ARCH)-ar
 OBJCPY 	= $(ARCH)-objcopy
 OBJDMP 	= $(ARCH)-objdump
 GDB 	= $(ARCH)-gdb
@@ -85,7 +86,7 @@ install:
 $(OBJDIR)/%.o: %.s
 	@mkdir -p $(dir $@)
 	$(info Building $< at $(OPTFLAG))
-	@$(AS) $(AFLAGS) $< -o $@ 
+	@$(AS) $(AFLAGS) $(INCLUDES) $< -o $@
 
 $(OBJDIR)/%.o: %.c $(OBJDIR)/%.d
 	@mkdir -p $(dir $@)
@@ -97,9 +98,9 @@ $(OBJDIR)/%.o: %.c[cp]* $(OBJDIR)/%.d
 	$(info Building $< at $(OPTFLAG))
 	@$(CXX) -c $(DEPFLAGS) $(OPTFLAG) $(CXXFLAGS) $< -o $@
 
-$(ELF): $(OBJECTS) $(LINKSCR)
+$(ELF): $(OBJECTS) $(LINKSCR) $(NEONLIBS)
 	$(info Linking...)
-	@$(LD) $(LFLAGS) -o $@ $(OBJECTS) 
+	@$(LD) $(LFLAGS) -o $@ $(OBJECTS) $(NEONLIBS)
 
 $(BIN): $(ELF)
 	$(OBJCPY) -O binary $< $@
